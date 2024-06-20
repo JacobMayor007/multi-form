@@ -178,6 +178,7 @@ ol {
 
 /* Main Content */
 .main-content {
+  position: relative;
   padding: 20px 10px 0px 10px;
 }
 
@@ -186,7 +187,7 @@ ol {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 290px;
+  height: 350px;
   padding: 10px 0px 10px 60px;
 }
 
@@ -212,10 +213,6 @@ ol {
   border: 1px outset;
   padding-top: 15px;
   padding-left: 10px;
-
-  /* &:active{
-  background-color: #3e8341;
-} */
 }
 
 .active-plan {
@@ -236,18 +233,73 @@ ol {
 .plan-three > h4 {
   color: #01386a;
 }
+
+.icon > svg {
+  margin-bottom: 40px;
+}
+
 /* Next Step Button */
+.next-button,
+.back-page {
+  text-align: center;
+  background-color: #01386a;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.next-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+  width: 110px;
+  height: 35px;
+}
+
+.next-button > a {
+  text-decoration: none;
+  color: hsl(0, 0%, 100%);
+}
+
+.back-page {
+  position: absolute;
+  left: 60px;
+  bottom: 20px;
+  height: 35px;
+  width: 110px;
+  font-size: 16px;
+  color: white;
+  font-weight: 650;
+}
 
 /* Error Handling*/
 
 /* Toggle Button */
 
+.toggle-container {
+  border-radius: 5px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 82%;
+  height: 30px;
+  background-color: #f8f4ff;
+}
+
 .toggle {
+  margin: 0 30px;
   position: absolute;
   height: 20px;
   width: 50px;
-  bottom: 0;
-  display: inline-block;
+  bottom: 4px;
 }
 
 .toggle #toggle-switch {
@@ -304,9 +356,4 @@ ol {
 
 .slider.slider.round::before {
   border-radius: 50%;
-}
-
-#arcade-icon {
-  height: 130px;
-  width: 130px;
 }

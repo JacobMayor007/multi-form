@@ -1,31 +1,36 @@
 $(document).ready(() => {
-  if (window.location.pathname.endsWith("index.html")) {
-    yourInfoFunction();
-  } else if (window.location.pathname.endsWith("select-plan.html")) {
+  // This function runs when the DOM is fully loaded
+  if (
+    window.location.pathname.endsWith("select-plan.html") ||
+    window.location.pathname.endsWith("select-plan")
+  ) {
     selectPlanFunction();
+  } else {
+    // If the current URL path does not match the above conditions, call yourInfoFunction()
+    yourInfoFunction();
   }
 });
 
+const yourInfoFunction = () => {
+  toggleClass();
+  nextStepFunction();
+  windowLoaderFunction();
+};
+
+const selectPlanFunction = () => {
+  selectPlanDisableButtonFunction();
+  toggleClass();
+  clickFunction();
+  BackPage();
+  selectPlanErrorHandlingFunction();
+  toggleYearlyMonthly();
+  windowLoaderFunction();
+  savedStateFunctions();
+};
+
 var fullName, email, phoneNumber;
 
-const toggleClass = () => {
-  $(".btn").click(function () {
-    $(".btn").removeClass("active");
-    $(this).addClass("active");
-  });
-};
-
-const clickFunction = () => {
-  $(".plan-one, .plan-two, .plan-three").click(function () {
-    $(this).toggleClass("active-plan");
-  });
-};
-
-const toggleYearlyMonthly = () => {
-  if ($("#toggle-switch").is(":checked")) {
-    $();
-  }
-};
+//Index Functions
 
 const nextStepFunction = () => {
   $(".next-step-button, .btn-two").on("click", () => {
@@ -89,14 +94,6 @@ const errorHandling = (fullName, email, phoneNumber) => {
   }
 };
 
-const BackPage = () => {
-  $(".btn-one, .back-page").on("click", () => {
-    window.history.back();
-  });
-};
-
-const selectPlanErrorHandlingFunction = () => {};
-
 const isValidEmail = (email) => {
   if (email.includes("@gmail.com") || email.includes("@yahoo.com")) {
     return true;
@@ -109,26 +106,56 @@ const isValidEmail = (email) => {
   }
 };
 
-const windowLoaderFunction = () => {
-  $(".loader-page").fadeOut(500);
-  $("section").fadeIn(2500);
+//Select Plan Functions
+const BackPage = () => {
+  $(".btn-one, .back-page").on("click", () => {
+    window.history.back();
+  });
+};
+
+const toggleYearlyMonthly = () => {
+  if ($("#toggle-switch").is(":checked")) {
+    alert("Checked");
+  }
+};
+
+const clickFunction = () => {
+  $(".plan-one, .plan-two, .plan-three").click(function () {
+    $(this).toggleClass("active-plan");
+  });
 };
 
 const selectPlanDisableButtonFunction = () => {
   $(".btn-three, .btn-four").attr("disabled", "disabled");
 };
 
-const yourInfoFunction = () => {
-  toggleClass();
-  nextStepFunction();
-  windowLoaderFunction();
+//Index && Select Plan Function
+const windowLoaderFunction = () => {
+  $(".loader-page").fadeOut(500);
+  $("section").fadeIn(2500);
 };
 
-const selectPlanFunction = () => {
-  selectPlanDisableButtonFunction();
-  toggleClass();
-  clickFunction();
-  BackPage();
-  selectPlanErrorHandlingFunction();
-  windowLoaderFunction();
+const toggleClass = () => {
+  $(".btn").click(function () {
+    $(".btn").removeClass("active");
+    $(this).addClass("active");
+  });
 };
+
+const savedStateFunctions = () => {
+  const checkbox = $("#toggle-switch");
+
+  function loadCheckboxState() {
+    const savedState = localStorage.getItem("checkboxState");
+    if (savedState === "true") {
+      checkbox.prop("checked", true);
+    }
+  }
+
+  loadCheckboxState();
+  checkbox.on("change", function () {
+    localStorage.setItem("checkboxState", checkbox.prop("checked"));
+  });
+};
+
+const selectPlanErrorHandlingFunction = () => {};

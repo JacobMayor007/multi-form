@@ -15,6 +15,11 @@
       sizes="32x32"
       href="./assets/images/favicon-32x32.png"
     />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <title>Frontend Mentor | Multi-step form</title>
     <style>
       .attribution {
@@ -185,19 +190,23 @@
                 </div>
               </div>
             </div>
-            <label class="toggle" name="toggleswitch">
-              <input type="checkbox" name="toggleswitch" id="toggle-switch" />
-              <span class="slider round"></span>
-            </label>
+            <div class="toggle-container">
+              <h5 style="margin-right: 90px; color: #01386a">Monthly</h5>
+              <label class="toggle" name="toggleswitch">
+                <input type="checkbox" name="toggleswitch" id="toggle-switch" />
+                <span class="slider round"></span>
+              </label>
+              <h5 style="margin-right: 10px; color: #01386a">Yearly</h5>
+            </div>
+          </div>
+          <div class="next-button">
+            <a href="add-ons.html">Next Step</a>
+          </div>
+          <a id="your-info-page" href="your-info.html"></a>
+          <div>
+            <button class="back-page">Go Back</button>
           </div>
         </div>
-      </div>
-      <a id="your-info-page" href="your-info.html"></a>
-      <div class="next-button">
-        <a href="add-ons.html">Next Step</a>
-      </div>
-      <div>
-        <button class="back-page">Go Back</button>
       </div>
     </section>
     <div class="attribution">
@@ -206,11 +215,6 @@
         >Frontend Mentor</a
       >. Coded by <a href="#">Your Name Here</a>.
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-      crossorigin="anonymous"
-    ></script>
     <script src="script.js"></script>
   </body>
 </html>
