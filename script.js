@@ -114,14 +114,29 @@ const BackPage = () => {
 };
 
 const toggleYearlyMonthly = () => {
-  if ($("#toggle-switch").is(":checked")) {
-    alert("Checked");
-  }
+  $("#toggle-switch").on("change", function () {
+    if ($(this).is(":checked")) {
+      $(this).attr("value", "true");
+    } else {
+      $(this).attr("value", "false");
+    }
+  });
 };
 
 const clickFunction = () => {
-  $(".plan-one, .plan-two, .plan-three").click(function () {
-    $(this).toggleClass("active-plan");
+  $(".icon-one > svg, .icon-one > h4, .icon-one > p").on("click", () => {
+    const checkbox = $("#arcade-checkbox")[0];
+    checkbox.checked = !checkbox.checked;
+  });
+
+  $(".icon-two > svg, .icon-two > h4, .icon-two > p").on("click", () => {
+    const checkbox = $("#advanced-checkbox")[0];
+    checkbox.checked = !checkbox.checked;
+  });
+
+  $(".icon-three > svg, .icon-three > h4, .icon-three > p").on("click", () => {
+    const checkbox = $("#pro-checkbox")[0];
+    checkbox.checked = !checkbox.checked;
   });
 };
 
@@ -143,7 +158,9 @@ const toggleClass = () => {
 };
 
 const savedStateFunctions = () => {
-  const checkbox = $("#toggle-switch");
+  const checkbox = $(
+    "#toggle-switch, #arcade-checkbox, #advanced-checkbox, #pro-checkbox"
+  );
 
   function loadCheckboxState() {
     const savedState = localStorage.getItem("checkboxState");

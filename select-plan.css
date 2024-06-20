@@ -195,47 +195,60 @@ ol {
   margin-bottom: 10px;
 }
 
-.row {
+.plan {
+  position: relative;
+}
+
+form {
   display: flex;
   flex-direction: row;
-  column-gap: 18px;
+  gap: 15px;
   margin-top: 35px;
 }
 
-.plan-one,
-.plan-two,
-.plan-three {
-  cursor: pointer;
+#arcade-checkbox,
+#advanced-checkbox,
+#pro-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
   width: 110px;
   height: 130px;
-  border-radius: 10px;
   background-color: #f8f4ff;
-  border: 1px outset;
-  padding-top: 15px;
-  padding-left: 10px;
+  cursor: pointer;
+  border-radius: 20px;
+  &:checked {
+    border-radius: 5px;
+    border: 1.9px solid;
+    border-color: #01386a;
+    box-shadow: 5px 2px #777;
+    transform: translateY(4px);
+  }
 }
 
-.active-plan {
-  border: 1.9px solid;
-  border-color: #01386a;
-  box-shadow: 5px 2px #777;
-  transform: translateY(4px);
+.icon {
+  width: fit-content;
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  z-index: 1;
+  cursor: pointer;
+}
+.icon > svg {
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 
-.plan-one > svg,
-.plan-two > svg,
-.plan-three > svg {
-  margin-bottom: 38px;
+label {
+  cursor: pointer;
 }
 
-.plan-one > h4,
-.plan-two > h4,
-.plan-three > h4 {
+.icon > h4 {
   color: #01386a;
 }
 
-.icon > svg {
-  margin-bottom: 40px;
+.icon > h4,
+.icon p {
+  cursor: pointer;
 }
 
 /* Next Step Button */

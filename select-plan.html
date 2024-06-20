@@ -124,9 +124,9 @@
                 <h1>Select Your Plan</h1>
                 <p>You have the option of monthly or yearly billing</p>
               </div>
-              <div class="row">
-                <div class="plan-one">
-                  <div class="icon">
+              <form action="row">
+                <label for="arcade" class="plan plan-one">
+                  <div class="icon icon-one" for="arcade">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="40"
@@ -139,15 +139,18 @@
                           fill="#FFF"
                           fill-rule="nonzero"
                           d="M24.995 18.005h-3.998v5.998h-2v-5.998H15a1 1 0 0 0-1 1V29a1 1 0 0 0 1 1h9.995a1 1 0 0 0 1-1v-9.995a1 1 0 0 0-1-1Zm-5.997 8.996h-2v-1.999h2v2Zm2-11.175a2.999 2.999 0 1 0-2 0v2.18h2v-2.18Z"
+                          for="arcade"
                         />
                       </g>
                     </svg>
+                    <h4>Arcade</h4>
+                    <p>$9/mo</p>
                   </div>
-                  <h4>Arcade</h4>
-                  <p>$9/mo</p>
-                </div>
-                <div class="plan-two">
-                  <div class="icon">
+                  <input type="checkbox" name="arcade" id="arcade-checkbox" />
+                </label>
+
+                <label for="advanced" class="plan plan-two">
+                  <div class="icon icon-two" for="advanced">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="40"
@@ -163,12 +166,18 @@
                         />
                       </g>
                     </svg>
+                    <h4>Advanced</h4>
+                    <p>$12/mo</p>
                   </div>
-                  <h4>Advanced</h4>
-                  <p>$12/mo</p>
-                </div>
-                <div class="plan-three">
-                  <div class="icon">
+                  <input
+                    type="checkbox"
+                    name="advanced"
+                    id="advanced-checkbox"
+                  />
+                </label>
+
+                <label for="pro" class="plan plan-three">
+                  <div class="icon icon-three">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="40"
@@ -184,16 +193,22 @@
                         />
                       </g>
                     </svg>
+                    <h4>Pro</h4>
+                    <p>$15/mo</p>
                   </div>
-                  <h4>Pro</h4>
-                  <p>$15/mo</p>
-                </div>
-              </div>
+                  <input type="checkbox" name="pro" id="pro-checkbox" />
+                </label>
+              </form>
             </div>
             <div class="toggle-container">
               <h5 style="margin-right: 90px; color: #01386a">Monthly</h5>
               <label class="toggle" name="toggleswitch">
-                <input type="checkbox" name="toggleswitch" id="toggle-switch" />
+                <input
+                  type="checkbox"
+                  name="toggleswitch"
+                  id="toggle-switch"
+                  value="false"
+                />
                 <span class="slider round"></span>
               </label>
               <h5 style="margin-right: 10px; color: #01386a">Yearly</h5>
