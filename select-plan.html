@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="select-plan.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <title>Frontend Mentor | Multi-step form</title>
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loader-page">
+      <div></div>
+    </div>
+    <!-- Sidebar start -->
+    <section>
+      <div class="container">
+        <div class="sidebar-container">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 274 568"
+          >
+            <rect width="274" height="568" fill="#483EFF" rx="10" />
+            <mask
+              id="a"
+              width="274"
+              height="568"
+              x="0"
+              y="0"
+              maskUnits="userSpaceOnUse"
+              style="mask-type: alpha"
+            >
+              <rect width="274" height="568" fill="#fff" rx="10" />
+            </mask>
+            <g mask="url(#a)">
+              <path
+                fill="#6259FF"
+                fill-rule="evenodd"
+                d="M-34.692 543.101C3.247 632.538 168.767 685.017 211.96 612.52c43.194-72.497-66.099-85.653-104.735-160.569-38.635-74.916-68.657-121.674-124.482-104.607-55.824 17.068-55.375 106.32-17.436 195.757Z"
+                clip-rule="evenodd"
+              />
+              <path
+                fill="#F9818E"
+                fill-rule="evenodd"
+                d="M233.095 601.153c60.679-28.278 92.839-143.526 41.875-171.528-50.965-28.003-57.397 47.579-108.059 75.987-50.662 28.408-82.14 50.207-69.044 88.241 13.096 38.034 74.549 35.578 135.228 7.3Z"
+                clip-rule="evenodd"
+              />
+              <path
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="bevel"
+                stroke-width="5"
+                d="m165.305 469.097 10.607-10.806M209.461 474.581l-12.506-10.503M187.56 488.991l-6.908 14.798"
+              />
+              <path
+                fill="#FFAF7E"
+                d="M.305 546.891c37.003 0 67-29.997 67-67s-29.997-67-67-67-67 29.997-67 67 29.997 67 67 67Z"
+              />
+            </g>
+          </svg>
+          <div class="sidebar-content">
+            <div class="steps-container">
+              <ol>
+                <li>
+                  <button class="btn btn-one">1</button>
+                  <div>
+                    <p>STEP 1</p>
+                    <h4>YOUR INFO</h4>
+                  </div>
+                </li>
+                <li>
+                  <button class="btn btn-two active">2</button>
+                  <div>
+                    <p>STEP 2</p>
+                    <h4>SELECT PLAN</h4>
+                  </div>
+                </li>
+                <li>
+                  <button class="btn btn-three">3</button>
+                  <div>
+                    <p>STEP 3</p>
+                    <h4>ADD ONS</h4>
+                  </div>
+                </li>
+                <li>
+                  <button class="btn btn-four">4</button>
+                  <div>
+                    <p>STEP 4</p>
+                    <h4>SUMMARY</h4>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="main-content">
+          <div class="inside-content">
+            <div>
+              <div>
+                <h1>Select Your Plan</h1>
+                <p>You have the option of monthly or yearly billing</p>
+              </div>
+              <div class="row">
+                <div class="plan-one">
+                  <div class="icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="40"
+                      height="40"
+                      viewBox="0 0 40 40"
+                    >
+                      <g fill="none" fill-rule="evenodd">
+                        <circle cx="20" cy="20" r="20" fill="#FFAF7E" />
+                        <path
+                          fill="#FFF"
+                          fill-rule="nonzero"
+                          d="M24.995 18.005h-3.998v5.998h-2v-5.998H15a1 1 0 0 0-1 1V29a1 1 0 0 0 1 1h9.995a1 1 0 0 0 1-1v-9.995a1 1 0 0 0-1-1Zm-5.997 8.996h-2v-1.999h2v2Zm2-11.175a2.999 2.999 0 1 0-2 0v2.18h2v-2.18Z"
+                        />
+                      </g>
+                    </svg>
+                  </div>
+                  <h4>Arcade</h4>
+                  <p>$9/mo</p>
+                </div>
+                <div class="plan-two">
+                  <div class="icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="40"
+                      height="40"
+                      viewBox="0 0 40 40"
+                    >
+                      <g fill="none" fill-rule="evenodd">
+                        <circle cx="20" cy="20" r="20" fill="#F9818E" />
+                        <path
+                          fill="#FFF"
+                          fill-rule="nonzero"
+                          d="M25.057 15H14.944C12.212 15 10 17.03 10 19.885c0 2.857 2.212 4.936 4.944 4.936h10.113c2.733 0 4.943-2.08 4.943-4.936S27.79 15 25.057 15ZM17.5 20.388c0 .12-.108.237-.234.237h-1.552v1.569c0 .126-.138.217-.259.217H14.5c-.118 0-.213-.086-.213-.203v-1.583h-1.569c-.126 0-.217-.139-.217-.26v-.956c0-.117.086-.213.202-.213h1.584v-1.554c0-.125.082-.231.203-.231h.989c.12 0 .236.108.236.234v1.551h1.555c.125 0 .231.083.231.204v.988Zm5.347.393a.862.862 0 0 1-.869-.855c0-.472.39-.856.869-.856.481 0 .87.384.87.856 0 .471-.389.855-.87.855Zm1.9 1.866a.86.86 0 0 1-.87-.852.86.86 0 0 1 .87-.855c.48 0 .87.38.87.855a.86.86 0 0 1-.87.852Zm0-3.736a.862.862 0 0 1-.87-.854c0-.472.39-.856.87-.856s.87.384.87.856a.862.862 0 0 1-.87.854Zm1.899 1.87a.862.862 0 0 1-.868-.855c0-.472.389-.856.868-.856s.868.384.868.856a.862.862 0 0 1-.868.855Z"
+                        />
+                      </g>
+                    </svg>
+                  </div>
+                  <h4>Advanced</h4>
+                  <p>$12/mo</p>
+                </div>
+                <div class="plan-three">
+                  <div class="icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="40"
+                      height="40"
+                      viewBox="0 0 40 40"
+                    >
+                      <g fill="none" fill-rule="evenodd">
+                        <circle cx="20" cy="20" r="20" fill="#483EFF" />
+                        <path
+                          fill="#FFF"
+                          fill-rule="nonzero"
+                          d="M26.666 13H13.334A3.333 3.333 0 0 0 10 16.333v7.193a3.447 3.447 0 0 0 2.14 3.24c1.238.5 2.656.182 3.56-.8L18.52 23h2.96l2.82 2.966a3.2 3.2 0 0 0 3.56.8 3.447 3.447 0 0 0 2.14-3.24v-7.193A3.333 3.333 0 0 0 26.666 13Zm-9.333 6H16v1.333a.667.667 0 0 1-1.333 0V19h-1.333a.667.667 0 0 1 0-1.334h1.333v-1.333a.667.667 0 1 1 1.333 0v1.333h1.333a.667.667 0 1 1 0 1.334Zm7.333 2a2.667 2.667 0 1 1 0-5.333 2.667 2.667 0 0 1 0 5.333ZM26 18.333a1.333 1.333 0 1 1-2.667 0 1.333 1.333 0 0 1 2.667 0Z"
+                        />
+                      </g>
+                    </svg>
+                  </div>
+                  <h4>Pro</h4>
+                  <p>$15/mo</p>
+                </div>
+              </div>
+            </div>
+            <label class="toggle" name="toggleswitch">
+              <input type="checkbox" name="toggleswitch" id="toggle-switch" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <a id="your-info-page" href="your-info.html"></a>
+      <div class="next-button">
+        <a href="add-ons.html">Next Step</a>
+      </div>
+      <div>
+        <button class="back-page">Go Back</button>
+      </div>
+    </section>
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="index.js"></script>
+  </body>
+</html>

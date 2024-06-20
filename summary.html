@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head runat="server">
+    <title>Test: jQuery</title>
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-latest.js"
+    ></script>
+    <script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var cookie1 = $.cookie("cookie1");
+        var cookie2 = $.cookie("cookie2");
+        var cookie3 = $.cookie("cookie3");
+        !(cookie1 == "changed") || $(".Checkbox1").attr("checked", true);
+        !(cookie2 == "changed") || $(".Checkbox2").attr("checked", true);
+        !(cookie3 == "changed") || $(".Checkbox3").attr("checked", true);
+        $(".Checkbox1")
+          .change(function () {
+            $("#displaySection1").toggle(!this.checked);
+            if (this.checked) {
+              $.cookie("cookie1", "changed");
+            } else {
+              $.cookie("cookie1", null);
+            }
+          })
+          .change();
+        $(".Checkbox2")
+          .change(function () {
+            $("#displaySection2").toggle(!this.checked);
+            if (this.checked) {
+              $.cookie("cookie2", "changed");
+            } else {
+              $.cookie("cookie2", null);
+            }
+          })
+          .change(); //ensure visible state matches initially
+        $(".Checkbox3")
+          .change(function () {
+            $("#displaySection3").toggle(!this.checked);
+            if (this.checked) {
+              $.cookie("cookie3", "changed");
+            } else {
+              $.cookie("cookie3", null);
+            }
+          })
+          .change(); //ensure visible state matches initially
+      }); //end function
+    </script>
+  </head>
+  <body>
+    <form id="form1" runat="server">
+      <input class="Checkbox1" type="checkbox" />Hide Section 1<br />
+      <input class="Checkbox2" type="checkbox" />Hide Section 2<br />
+      <input class="Checkbox3" type="checkbox" />Hide Section 3<br />
+      <br />
+
+      <div id="content">
+        <div id="displaySection1">
+          <strong>Section 1</strong>
+          <br />
+          Content for section 1 goes here.
+          <br /><br />
+        </div>
+        <div id="displaySection2">
+          <strong>Section 2</strong>
+          <br />
+          Content for section 2 goes here.
+          <br /><br />
+        </div>
+        <div id="displaySection3">
+          <strong>Section 3</strong>
+          <br />
+          Content for section 3 goes here.
+          <br /><br />
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

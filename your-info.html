@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- displays site properly based on user's device -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style-your-info.css" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="./assets/images/favicon-32x32.png"
+  />
+  <title>Frontend Mentor | Multi-step form</title>
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+<body>
+  <div class="loader-page">
+    <div></div>
+  </div>
+  <!-- Sidebar start -->
+   <div>
+  <section>
+    <div class="container">
+      <div class="sidebar-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 274 568"
+        >
+          <rect width="274" height="568" fill="#483EFF" rx="10" />
+          <mask
+            id="a"
+            width="274"
+            height="568"
+            x="0"
+            y="0"
+            maskUnits="userSpaceOnUse"
+            style="mask-type: alpha"
+          >
+            <rect width="274" height="568" fill="#fff" rx="10" />
+          </mask>
+          <g mask="url(#a)">
+            <path
+              fill="#6259FF"
+              fill-rule="evenodd"
+              d="M-34.692 543.101C3.247 632.538 168.767 685.017 211.96 612.52c43.194-72.497-66.099-85.653-104.735-160.569-38.635-74.916-68.657-121.674-124.482-104.607-55.824 17.068-55.375 106.32-17.436 195.757Z"
+              clip-rule="evenodd"
+            />
+            <path
+              fill="#F9818E"
+              fill-rule="evenodd"
+              d="M233.095 601.153c60.679-28.278 92.839-143.526 41.875-171.528-50.965-28.003-57.397 47.579-108.059 75.987-50.662 28.408-82.14 50.207-69.044 88.241 13.096 38.034 74.549 35.578 135.228 7.3Z"
+              clip-rule="evenodd"
+            />
+            <path
+              stroke="#fff"
+              stroke-linecap="round"
+              stroke-linejoin="bevel"
+              stroke-width="5"
+              d="m165.305 469.097 10.607-10.806M209.461 474.581l-12.506-10.503M187.56 488.991l-6.908 14.798"
+            />
+            <path
+              fill="#FFAF7E"
+              d="M.305 546.891c37.003 0 67-29.997 67-67s-29.997-67-67-67-67 29.997-67 67 29.997 67 67 67Z"
+            />
+          </g>
+        </svg>
+        <div class="sidebar-content">
+          <div class="steps-container">
+            <ol>
+              <li>
+                <button class="btn btn-one active">1</button>
+                <div>
+                  <p>STEP 1</p>
+                  <h4>YOUR INFO</h4>
+                </div>
+              </li>
+              <li>
+                <button class="btn btn-two" name="buttons">2</button>
+                <div>
+                  <p>STEP 2</p>
+                  <h4>SELECT PLAN</h4>
+                </div>
+              </li>
+              <li>
+                <button class="btn btn-three" name="buttons">3</button>
+                <div>
+                  <p>STEP 3</p>
+                  <h4>ADD ONS</h4>
+                </div>
+              </li>
+              <li>
+                <button class="btn btn-four" name="buttons">4</button>
+                <div>
+                  <p>STEP 4</p>
+                  <h4>SUMMARY</h4>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="inside-content">
+          <form action="">
+            <h1>Personal Info</h1>
+            <p>
+              Please provide your name, email address, and phone number.
+            </p>
+            <h3>
+              Name
+              <span class="fullname-error error"
+                >This field is required</span
+              >
+            </h3>
+            <label for="fullName">
+              <input
+                type="text"
+                name="fullname"
+                id="fullName-input"
+                placeholder="John Doe"
+              />
+            </label>
+            <h3>
+              Email Address
+              <span class="email-error error">This field is required</span>
+            </h3>
+            <label for="fullName">
+              <input
+                type="email"
+                name="email"
+                id="email-input"
+                placeholder="johndoe143@gmail.com"
+              />
+            </label>
+            <h3>
+              Phone Number
+              <span class="phonenumber-error error"
+                >This field is required</span
+              >
+            </h3>
+            <label for="phonenumber">
+              <input
+                type="number"
+                name="phonenumber"
+                id="phonenumber-input"
+                placeholder="09123456789"
+              />
+            </label>
+          </form>
+          <button class="next-step-button">Next Step</button>
+          <a id="page" href="./select-plan.html"></a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </section>
+  <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"
+  ></script>
+  <script src="index.js"></script>
+</body>
+</html>
