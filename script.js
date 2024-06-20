@@ -1,3 +1,11 @@
+$(document).ready(() => {
+  if (window.location.pathname.endsWith("index.html")) {
+    yourInfoFunction();
+  } else if (window.location.pathname.endsWith("select-plan.html")) {
+    selectPlanFunction();
+  }
+});
+
 var fullName, email, phoneNumber;
 
 const toggleClass = () => {
@@ -103,7 +111,7 @@ const isValidEmail = (email) => {
 
 const windowLoaderFunction = () => {
   $(".loader-page").fadeOut(500);
-  $("section-").fadeIn(2500);
+  $("section").fadeIn(2500);
 };
 
 const selectPlanDisableButtonFunction = () => {
@@ -116,15 +124,6 @@ const yourInfoFunction = () => {
   windowLoaderFunction();
 };
 
-const checkBoxStateFunction = () => {
-  const checkbox = $("#toggle-switch");
-
-  // Check if the checkbox state is stored in local storage
-  if (localStorage.getItem("checkboxState") === "checked") {
-    checkbox.prop("checked", true);
-  }
-};
-
 const selectPlanFunction = () => {
   selectPlanDisableButtonFunction();
   toggleClass();
@@ -133,11 +132,3 @@ const selectPlanFunction = () => {
   selectPlanErrorHandlingFunction();
   windowLoaderFunction();
 };
-
-$(document).ready(() => {
-  if (window.location.pathname.endsWith("your-info.html")) {
-    yourInfoFunction();
-  } else if (window.location.pathname.endsWith("select-plan.html")) {
-    selectPlanFunction();
-  }
-});
