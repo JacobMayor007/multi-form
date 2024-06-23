@@ -5,36 +5,32 @@ $(document).ready(() => {
     window.location.pathname.endsWith("select-plan")
   ) {
     selectPlanFunction();
+  } else if (
+    window.location.pathname.endsWith("add-ons.html") ||
+    window.location.pathname.endsWith("add-ons")
+  ) {
   } else {
     yourInfoFunction();
   }
 });
 
 const yourInfoFunction = () => {
-  toggleClass();
   windowLoaderFunction();
-  nextStepFunction();
-};
-
-const windowLoaderFunction = () => {
-  $(".loader-page").fadeOut(500);
-  $("section").fadeIn(2500);
 };
 
 const selectPlanFunction = () => {
+  windowLoaderSelectedPlanFunction();
   selectPlanDisableButtonFunction();
-  toggleClass();
-  clickFunction();
-  BackPage();
-  selectPlanErrorHandlingFunction();
-  toggleYearlyMonthly();
-  windowLoaderFunction();
   savedStateFunctions();
-  savedStateTwoFunctions();
-  nextStepButtonFunction();
+  savePlanValueFunction();
+  toggleClass();
+  BackPage();
+  saveSelectedPlanFunction();
+  cancelFunction();
+  getInformation();
 };
 
-var fullName, email, phoneNumber;
+let fullName, email, phoneNumber, selectedPlan;
 
 //Index Functions
 
@@ -95,94 +91,40 @@ const errorHandling = (fullName, email, phoneNumber) => {
       $(".phonenumber-error").fadeOut(1000);
     }, 3000);
   } else {
-    $("#page")[0].click();
-    $(".btn-two]").removeAttr("disabled", "disabled");
+    window.location.href = "select-plan.html";
+    saveInfoFunction();
+    $(".btn-two").removeAttr("disabled");
   }
 };
 
 const isValidEmail = (email) => {
-  if (email.includes("@gmail.com") || email.includes("@yahoo.com")) {
-    return true;
-  } else if (email.includes("@gmail.com")) {
-    return true;
-  } else if (email.includes("@yahoo.com")) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-const toggleClass = () => {
-  $(".btn").click(function () {
-    $(".btn").removeClass("active");
-    $(this).addClass("active");
-  });
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
 };
 
 //Select Plan Functions
 
-const clickFunction = () => {
-  $(".icon").click(function () {
-    $();
-  });
-
-  planOne = $(".icon-one > svg, .icon-one > h4, .icon-one > p").on(
-    "click",
-    () => {
-      const checkbox = $("#arcade-checkbox")[0];
-      checkbox.checked = !checkbox.checked;
-      saveCheckboxState("arcade", checkbox.checked);
-    }
-  );
-
-  planTwo = $(".icon-two > svg, .icon-two > h4, .icon-two > p").on(
-    "click",
-    () => {
-      const checkbox = $("#advanced-checkbox")[0];
-      checkbox.checked = !checkbox.checked;
-      saveCheckboxState("advanced", checkbox.checked);
-    }
-  );
-
-  planThree = $(".icon-three > svg, .icon-three > h4, .icon-three > p").on(
-    "click",
-    () => {
-      const checkbox = $("#pro-checkbox")[0];
-      checkbox.checked = !checkbox.checked;
-      saveCheckboxState("pro", checkbox.checked);
-    }
-  );
-};
-
-function restoreCheckboxState(key) {
-  const checkbox = $("#" + key + "-checkbox")[0];
-  const savedState = localStorage.getItem(key);
-  if (savedState !== null) {
-    checkbox.checked = savedState === "true";
-  }
-}
-
-restoreCheckboxState("arcade");
-restoreCheckboxState("advanced");
-restoreCheckboxState("pro");
-
-const nextStepButtonFunction = () => {
+const savePlanValueFunction = () => {
   $(".next-button").on("click", () => {
+    const value = $("input[name = 'plans']:checked").val();
     const toggleCheck = $("#toggle-switch").is(":checked");
-    const arcadeCheckbox = $("#arcade-checkbox").is(":checked");
-    if (toggleCheck && arcadeCheckbox) {
-      alert("Yearly");
-      alert("$90/yr");
+    if (toggleCheck === true) {
+      selectedPlan = parseInt(value) * 10;
     } else {
-      alert("Working");
+      selectedPlan = parseInt(value) * 1;
     }
+    window.location.href = "add-ons.html";
   });
 };
-
 const BackPage = () => {
-  $(".btn-one, .back-page").on("click", () => {
-    window.history.back();
-  });
+  if (
+    window.location.pathname.endsWith("select-plan") ||
+    window.location.pathname.endsWith("select-plan.html")
+  ) {
+    $(".back-page, .btn-one").on("click", () => {
+      window.location.href = "index.html";
+    });
+  }
 };
 
 const toggleYearlyMonthly = () => {
@@ -195,73 +137,125 @@ const toggleYearlyMonthly = () => {
   });
 };
 
-function saveCheckboxState(key, value) {
-  localStorage.setItem(key, value);
-}
-
 const selectPlanDisableButtonFunction = () => {
   $(".btn-three, .btn-four").attr("disabled", "disabled");
 };
 
-//Index && Select Plan Function
-
 const savedStateFunctions = () => {
   const checkbox = $("#toggle-switch");
 
+  checkbox.on("change", function () {
+    const isChecked = checkbox.prop("checked");
+    sessionStorage.setItem("checkboxState", isChecked);
+    updatePricing(isChecked);
+  });
+
   function loadCheckboxState() {
-    const savedState = localStorage.getItem("checkboxState");
+    const savedState = sessionStorage.getItem("checkboxState");
     const isChecked = savedState === "true";
     checkbox.prop("checked", isChecked);
 
-    // Update pricing information for all plans
     updatePricing(isChecked);
   }
 
-  // Call loadCheckboxState during page load
   loadCheckboxState();
-
-  // Handle the checkbox change event
-  checkbox.on("change", function () {
-    const isChecked = checkbox.prop("checked");
-    localStorage.setItem("checkboxState", isChecked);
-    updatePricing(isChecked); // Update pricing information when the checkbox changes
-  });
 
   // Function to update pricing based on the checkbox state
   function updatePricing(isYearly) {
-    $(".icon-one > p").text(isYearly ? "$90/year" : "$9/mo");
-    $(".icon-one > h5").css({ display: isYearly ? "block" : "none" });
-    $(".icon-one > h5").text(isYearly ? "2 months free" : "");
-    $(".icon-two > p").text(isYearly ? "$120/year" : "$12/mo");
-    $(".icon-two > h5").css({ display: isYearly ? "block" : "none" });
-    $(".icon-two > h5").text(isYearly ? "2 months free" : "");
-    $(".icon-three > p").text(isYearly ? "$150/year" : "$15/mo");
-    $(".icon-three > h5").css({ display: isYearly ? "block" : "none" });
-    $(".icon-three > h5").text(isYearly ? "2 months free" : "");
-    $("#pro-checkbox, #advanced-checkbox, #arcade-checkbox").css({
+    $(".option-one > p").text(isYearly ? "$90/year" : "$9/mo");
+    $(".option-one > h5").css({ display: isYearly ? "block" : "none" });
+    $(".option-one > h5").text(isYearly ? "2 months free" : "");
+    $(".option-two > p").text(isYearly ? "$120/year" : "$12/mo");
+    $(".option-two > h5").css({ display: isYearly ? "block" : "none" });
+    $(".option-two > h5").text(isYearly ? "2 months free" : "");
+    $(".option-three > p").text(isYearly ? "$150/year" : "$15/mo");
+    $(".option-three > h5").css({ display: isYearly ? "block" : "none" });
+    $(".option-three > h5").text(isYearly ? "2 months free" : "");
+    $("#pro-radio, #advanced-radio, #arcade-radio").css({
       height: isYearly ? "150px" : "130px",
     });
   }
 };
 
-const savedStateTwoFunctions = () => {
-  const arcadeCheckbox = $("#arcade-checkbox");
+const saveSelectedPlanFunction = () => {
+  $("input[name='plans']").on("change", function () {
+    saveSelectedPlan($(this).attr("id"));
+  });
 
-  function loadCheckboxState() {
-    const savedState = localStorage.getItem("arcadeCheckboxState");
+  function saveSelectedPlan(planId) {
+    sessionStorage.setItem("selectedPlan", planId);
+  }
+  function loadSelectedPlan() {
+    const selectedPlan = sessionStorage.getItem("selectedPlan");
+    if (selectedPlan) {
+      $(`#${selectedPlan}`).prop("checked", true);
+    }
+  }
+  loadSelectedPlan();
+};
 
-    if (savedState === "true") {
-      arcadeCheckbox.prop("checked", true);
-      planOne.prop("checked", true);
+const saveInfoFunction = () => {
+  // Save the fullName value to local storage when the input changes
+  $("#fullName-input").on("input", function () {
+    const fullName = $(this).val();
+    sessionStorage.setItem("fullNameValue", fullName);
+  });
+  $("#email-input").on("input", () => {
+    const email = $("#email-input").val();
+    sessionStorage.setItem("emailValue", email);
+  });
+
+  $("#phonenumber-input").on("input", function () {
+    const phoneNumber = $(this).val();
+    sessionStorage.setItem("phoneNumberValue", phoneNumber);
+  });
+
+  function loadSelectedPlan() {
+    const fullNameValue = sessionStorage.getItem("fullNameValue");
+    const emailValue = sessionStorage.getItem("emailValue");
+    const phoneNumberValue = sessionStorage.getItem("phoneNumberValue");
+    if (fullNameValue) {
+      $("#fullName-input").val(fullNameValue);
+    }
+    if (emailValue) {
+      $("#email-input").val(emailValue);
+    }
+    if (phoneNumberValue) {
+      $("#phonenumber-input").val(phoneNumberValue);
     }
   }
 
-  loadCheckboxState();
+  loadSelectedPlan();
+};
 
-  arcadeCheckbox.on("change", function () {
-    localStorage.setItem("arcadeCheckboxState", arcadeCheckbox.prop("checked"));
+const cancelFunction = () => {
+  $("#btnSubmit").on("click", () => {
+    var allRadioButtos = $("input[type='radio']:checked");
+    allRadioButtos.each(function () {
+      allRadioButtos.prop("checked", false);
+      sessionStorage.removeItem("selectedPlan");
+    });
   });
 };
-console.log("Loaded successfully!"); // Check if this message appears in the console
+//Index && Select Plan Function
 
-const selectPlanErrorHandlingFunction = () => {};
+const windowLoaderFunction = () => {
+  $(".loader-page").fadeOut(500);
+  $(".load-page").fadeIn(1500);
+  toggleClass();
+  nextStepFunction();
+  saveInfoFunction();
+};
+
+const windowLoaderSelectedPlanFunction = () => {
+  $(".loader-page").fadeOut(500);
+  $(".load-page").fadeIn(200);
+  toggleClass();
+};
+
+const toggleClass = () => {
+  $(".btn").click(function () {
+    $(".btn").removeClass("active");
+    $(this).addClass("active");
+  });
+};
