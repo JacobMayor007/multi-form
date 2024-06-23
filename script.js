@@ -6,15 +6,19 @@ $(document).ready(() => {
   ) {
     selectPlanFunction();
   } else {
-    // If the current URL path does not match the above conditions, call yourInfoFunction()
     yourInfoFunction();
   }
 });
 
 const yourInfoFunction = () => {
   toggleClass();
-  nextStepFunction();
   windowLoaderFunction();
+  nextStepFunction();
+};
+
+const windowLoaderFunction = () => {
+  $(".loader-page").fadeOut(500);
+  $("section").fadeIn(2500);
 };
 
 const selectPlanFunction = () => {
@@ -26,6 +30,8 @@ const selectPlanFunction = () => {
   toggleYearlyMonthly();
   windowLoaderFunction();
   savedStateFunctions();
+  savedStateTwoFunctions();
+  nextStepButtonFunction();
 };
 
 var fullName, email, phoneNumber;
@@ -106,7 +112,73 @@ const isValidEmail = (email) => {
   }
 };
 
+const toggleClass = () => {
+  $(".btn").click(function () {
+    $(".btn").removeClass("active");
+    $(this).addClass("active");
+  });
+};
+
 //Select Plan Functions
+
+const clickFunction = () => {
+  $(".icon").click(function () {
+    $();
+  });
+
+  planOne = $(".icon-one > svg, .icon-one > h4, .icon-one > p").on(
+    "click",
+    () => {
+      const checkbox = $("#arcade-checkbox")[0];
+      checkbox.checked = !checkbox.checked;
+      saveCheckboxState("arcade", checkbox.checked);
+    }
+  );
+
+  planTwo = $(".icon-two > svg, .icon-two > h4, .icon-two > p").on(
+    "click",
+    () => {
+      const checkbox = $("#advanced-checkbox")[0];
+      checkbox.checked = !checkbox.checked;
+      saveCheckboxState("advanced", checkbox.checked);
+    }
+  );
+
+  planThree = $(".icon-three > svg, .icon-three > h4, .icon-three > p").on(
+    "click",
+    () => {
+      const checkbox = $("#pro-checkbox")[0];
+      checkbox.checked = !checkbox.checked;
+      saveCheckboxState("pro", checkbox.checked);
+    }
+  );
+};
+
+function restoreCheckboxState(key) {
+  const checkbox = $("#" + key + "-checkbox")[0];
+  const savedState = localStorage.getItem(key);
+  if (savedState !== null) {
+    checkbox.checked = savedState === "true";
+  }
+}
+
+restoreCheckboxState("arcade");
+restoreCheckboxState("advanced");
+restoreCheckboxState("pro");
+
+const nextStepButtonFunction = () => {
+  $(".next-button").on("click", () => {
+    const toggleCheck = $("#toggle-switch").is(":checked");
+    const arcadeCheckbox = $("#arcade-checkbox").is(":checked");
+    if (toggleCheck && arcadeCheckbox) {
+      alert("Yearly");
+      alert("$90/yr");
+    } else {
+      alert("Working");
+    }
+  });
+};
+
 const BackPage = () => {
   $(".btn-one, .back-page").on("click", () => {
     window.history.back();
@@ -123,56 +195,73 @@ const toggleYearlyMonthly = () => {
   });
 };
 
-const clickFunction = () => {
-  $(".icon-one > svg, .icon-one > h4, .icon-one > p").on("click", () => {
-    const checkbox = $("#arcade-checkbox")[0];
-    checkbox.checked = !checkbox.checked;
-  });
-
-  $(".icon-two > svg, .icon-two > h4, .icon-two > p").on("click", () => {
-    const checkbox = $("#advanced-checkbox")[0];
-    checkbox.checked = !checkbox.checked;
-  });
-
-  $(".icon-three > svg, .icon-three > h4, .icon-three > p").on("click", () => {
-    const checkbox = $("#pro-checkbox")[0];
-    checkbox.checked = !checkbox.checked;
-  });
-};
+function saveCheckboxState(key, value) {
+  localStorage.setItem(key, value);
+}
 
 const selectPlanDisableButtonFunction = () => {
   $(".btn-three, .btn-four").attr("disabled", "disabled");
 };
 
 //Index && Select Plan Function
-const windowLoaderFunction = () => {
-  $(".loader-page").fadeOut(500);
-  $("section").fadeIn(2500);
-};
-
-const toggleClass = () => {
-  $(".btn").click(function () {
-    $(".btn").removeClass("active");
-    $(this).addClass("active");
-  });
-};
 
 const savedStateFunctions = () => {
-  const checkbox = $(
-    "#toggle-switch, #arcade-checkbox, #advanced-checkbox, #pro-checkbox"
-  );
+  const checkbox = $("#toggle-switch");
 
   function loadCheckboxState() {
     const savedState = localStorage.getItem("checkboxState");
+    const isChecked = savedState === "true";
+    checkbox.prop("checked", isChecked);
+
+    // Update pricing information for all plans
+    updatePricing(isChecked);
+  }
+
+  // Call loadCheckboxState during page load
+  loadCheckboxState();
+
+  // Handle the checkbox change event
+  checkbox.on("change", function () {
+    const isChecked = checkbox.prop("checked");
+    localStorage.setItem("checkboxState", isChecked);
+    updatePricing(isChecked); // Update pricing information when the checkbox changes
+  });
+
+  // Function to update pricing based on the checkbox state
+  function updatePricing(isYearly) {
+    $(".icon-one > p").text(isYearly ? "$90/year" : "$9/mo");
+    $(".icon-one > h5").css({ display: isYearly ? "block" : "none" });
+    $(".icon-one > h5").text(isYearly ? "2 months free" : "");
+    $(".icon-two > p").text(isYearly ? "$120/year" : "$12/mo");
+    $(".icon-two > h5").css({ display: isYearly ? "block" : "none" });
+    $(".icon-two > h5").text(isYearly ? "2 months free" : "");
+    $(".icon-three > p").text(isYearly ? "$150/year" : "$15/mo");
+    $(".icon-three > h5").css({ display: isYearly ? "block" : "none" });
+    $(".icon-three > h5").text(isYearly ? "2 months free" : "");
+    $("#pro-checkbox, #advanced-checkbox, #arcade-checkbox").css({
+      height: isYearly ? "150px" : "130px",
+    });
+  }
+};
+
+const savedStateTwoFunctions = () => {
+  const arcadeCheckbox = $("#arcade-checkbox");
+
+  function loadCheckboxState() {
+    const savedState = localStorage.getItem("arcadeCheckboxState");
+
     if (savedState === "true") {
-      checkbox.prop("checked", true);
+      arcadeCheckbox.prop("checked", true);
+      planOne.prop("checked", true);
     }
   }
 
   loadCheckboxState();
-  checkbox.on("change", function () {
-    localStorage.setItem("checkboxState", checkbox.prop("checked"));
+
+  arcadeCheckbox.on("change", function () {
+    localStorage.setItem("arcadeCheckboxState", arcadeCheckbox.prop("checked"));
   });
 };
+console.log("Loaded successfully!"); // Check if this message appears in the console
 
 const selectPlanErrorHandlingFunction = () => {};
