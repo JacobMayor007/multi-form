@@ -9,6 +9,7 @@ $(document).ready(() => {
     window.location.pathname.endsWith("add-ons.html") ||
     window.location.pathname.endsWith("add-ons")
   ) {
+    addOnsFunctions();
   } else {
     yourInfoFunction();
   }
@@ -28,6 +29,16 @@ const selectPlanFunction = () => {
   saveSelectedPlanFunction();
   cancelFunction();
   getInformation();
+};
+
+const addOnsFunctions = () => {
+  windowLoaderAddOnsFunction();
+  checkUncheckBox();
+  toggleClass();
+  addOnsFunctionsDisableButtonFunction();
+  BackPageAddOns();
+  YearlyMonthlyAddOnsFunctions();
+  saveAddOnsStorageFunction();
 };
 
 let fullName, email, phoneNumber, selectedPlan;
@@ -54,8 +65,8 @@ const errorHandling = (fullName, email, phoneNumber) => {
     setTimeout(() => {
       $(".error").css({ color: "#c83f49" }).fadeOut();
     }, 3000);
-  } else if (fullName === "") {
-    $(".fullname-error").css({ color: "#c83f49" }).fadeIn();
+  } else if (fullName === "" || !isFullNameValid(fullName)) {
+    $(".fullname-error").css({ color: "#c83f49", fontSize: "16px" }).fadeIn();
     setTimeout(() => {
       $(".fullname-error").fadeOut();
     }, 3000);
@@ -97,23 +108,73 @@ const errorHandling = (fullName, email, phoneNumber) => {
   }
 };
 
+const isFullNameValid = (fullName) => {
+  let invalidCharsPattern = /[@1234567890!#$%^&*()\-_=+;{}[\]:;<>,?/]/;
+  return !invalidCharsPattern.test(fullName);
+};
+
 const isValidEmail = (email) => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(email);
 };
 
+const saveInfoFunction = () => {
+  // Save the fullName value to local storage when the input changes
+  $("#fullName-input").on("input", function () {
+    const fullName = $(this).val();
+    sessionStorage.setItem("fullNameValue", fullName);
+  });
+  $("#email-input").on("input", () => {
+    const email = $("#email-input").val();
+    sessionStorage.setItem("emailValue", email);
+  });
+
+  $("#phonenumber-input").on("input", function () {
+    const phoneNumber = $(this).val();
+    sessionStorage.setItem("phoneNumberValue", phoneNumber);
+  });
+
+  function loadSelectedPlan() {
+    const fullNameValue = sessionStorage.getItem("fullNameValue");
+    const emailValue = sessionStorage.getItem("emailValue");
+    const phoneNumberValue = sessionStorage.getItem("phoneNumberValue");
+    if (fullNameValue) {
+      $("#fullName-input").val(fullNameValue);
+    }
+    if (emailValue) {
+      $("#email-input").val(emailValue);
+    }
+    if (phoneNumberValue) {
+      $("#phonenumber-input").val(phoneNumberValue);
+    }
+  }
+
+  loadSelectedPlan();
+};
+
 //Select Plan Functions
 
 const savePlanValueFunction = () => {
-  $(".next-button").on("click", () => {
+  $(".next-button, .btn-three").on("click", () => {
     const value = $("input[name = 'plans']:checked").val();
     const toggleCheck = $("#toggle-switch").is(":checked");
-    if (toggleCheck === true) {
+    if (value === undefined) {
+      $(".content > div > h4")
+        .text("This field is required")
+        .css({ color: "#c83f49" })
+        .fadeIn();
+      setTimeout(() => {
+        $(".content > div > h4").fadeOut();
+      }, 5000);
+    } else if (toggleCheck === true) {
       selectedPlan = parseInt(value) * 10;
-    } else {
+      window.location.href = "add-ons.html";
+    } else if (toggleCheck === false) {
       selectedPlan = parseInt(value) * 1;
+      window.location.href = "add-ons.html";
+    } else {
+      console.log("Syntax error");
     }
-    window.location.href = "add-ons.html";
   });
 };
 const BackPage = () => {
@@ -160,7 +221,6 @@ const savedStateFunctions = () => {
 
   loadCheckboxState();
 
-  // Function to update pricing based on the checkbox state
   function updatePricing(isYearly) {
     $(".option-one > p").text(isYearly ? "$90/year" : "$9/mo");
     $(".option-one > h5").css({ display: isYearly ? "block" : "none" });
@@ -194,40 +254,6 @@ const saveSelectedPlanFunction = () => {
   loadSelectedPlan();
 };
 
-const saveInfoFunction = () => {
-  // Save the fullName value to local storage when the input changes
-  $("#fullName-input").on("input", function () {
-    const fullName = $(this).val();
-    sessionStorage.setItem("fullNameValue", fullName);
-  });
-  $("#email-input").on("input", () => {
-    const email = $("#email-input").val();
-    sessionStorage.setItem("emailValue", email);
-  });
-
-  $("#phonenumber-input").on("input", function () {
-    const phoneNumber = $(this).val();
-    sessionStorage.setItem("phoneNumberValue", phoneNumber);
-  });
-
-  function loadSelectedPlan() {
-    const fullNameValue = sessionStorage.getItem("fullNameValue");
-    const emailValue = sessionStorage.getItem("emailValue");
-    const phoneNumberValue = sessionStorage.getItem("phoneNumberValue");
-    if (fullNameValue) {
-      $("#fullName-input").val(fullNameValue);
-    }
-    if (emailValue) {
-      $("#email-input").val(emailValue);
-    }
-    if (phoneNumberValue) {
-      $("#phonenumber-input").val(phoneNumberValue);
-    }
-  }
-
-  loadSelectedPlan();
-};
-
 const cancelFunction = () => {
   $("#btnSubmit").on("click", () => {
     var allRadioButtos = $("input[type='radio']:checked");
@@ -237,6 +263,7 @@ const cancelFunction = () => {
     });
   });
 };
+
 //Index && Select Plan Function
 
 const windowLoaderFunction = () => {
@@ -259,3 +286,103 @@ const toggleClass = () => {
     $(this).addClass("active");
   });
 };
+
+/* Add-Ons Functions */
+const windowLoaderAddOnsFunction = () => {
+  $(".loader-page").fadeOut(500);
+  $(".load-page").fadeIn(200);
+};
+
+const checkUncheckBox = () => {
+  $("label").change(function () {
+    $(this).toggleClass("active");
+  });
+};
+
+const addOnsFunctionsDisableButtonFunction = () => {
+  $(".btn-four").attr("disabled", "disabled");
+};
+
+const BackPageAddOns = () => {
+  if (
+    window.location.pathname.endsWith("add-ons") ||
+    window.location.pathname.endsWith("add-ons.html")
+  ) {
+    $(".back-page, .btn-two").on("click", () => {
+      window.location.href = "select-plan.html";
+    });
+  }
+};
+
+const YearlyMonthlyAddOnsFunctions = () => {
+  const checkbox = $("#toggle-switch");
+
+  checkbox.on("change", function () {
+    const isChecked = checkbox.prop("checked");
+    sessionStorage.setItem("checkboxState", isChecked);
+    updatePricing(isChecked);
+    saveAddOnsPricing(isChecked);
+  });
+
+  function loadCheckboxState() {
+    const savedState = sessionStorage.getItem("checkboxState");
+    const isChecked = savedState === "true";
+    checkbox.prop("checked", isChecked);
+
+    updatePricing(isChecked);
+    saveAddOnsPricing(isChecked);
+  }
+
+  loadCheckboxState();
+
+  function updatePricing(isYearly) {
+    $(".online-service > div > h5").text(isYearly ? "+$10/yr" : "+$1/mo");
+    $(".larger-storage > div >h5").text(isYearly ? "+$20/yr" : "+$2/mo");
+    $(".customizable-profile > div > h5").text(isYearly ? "+$20/yr" : "+$2/mo");
+  }
+};
+
+const saveAddOnsStorageFunction = () => {
+  const checkboxOnlineService = $("#online-service-checkbox");
+  const checkboxLargerStorage = $("#larger-storage-checkbox");
+  const checkboxCustomizableProfile = $("#customizable-profile-checkbox");
+
+  checkboxOnlineService.on("change", function () {
+    const isCheckedOnlineService = checkboxOnlineService.prop("checked");
+    sessionStorage.setItem("onlineServiceValue", isCheckedOnlineService);
+  });
+
+  checkboxLargerStorage.on("change", function () {
+    const isCheckedLargerStorage = checkboxLargerStorage.prop("checked");
+    sessionStorage.setItem("largerStorageValue", isCheckedLargerStorage);
+  });
+
+  checkboxCustomizableProfile.on("change", function () {
+    const isCheckedCustomizableProfile =
+      checkboxCustomizableProfile.prop("checked");
+    sessionStorage.setItem(
+      "customizableProfileValue",
+      isCheckedCustomizableProfile
+    );
+  });
+
+  function loadAddons() {
+    const onlineServiceValue =
+      sessionStorage.getItem("onlineServiceValue") === "true";
+    const largerStorageValue =
+      sessionStorage.getItem("largerStorageValue") === "true";
+    const customizableProfileValue =
+      sessionStorage.getItem("customizableProfileValue") === "true";
+
+    $("#online-service-checkbox").prop("checked", onlineServiceValue);
+    $("#larger-storage-checkbox").prop("checked", largerStorageValue);
+    $("#customizable-profile-checkbox").prop(
+      "checked",
+      customizableProfileValue
+    );
+  }
+
+  loadAddons();
+};
+
+const saveAddOnsPricing = (isYearly) => {};
