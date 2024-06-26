@@ -572,6 +572,9 @@ const confirmButton = () => {
       }, 300);
     } else {
       $(".content").fadeOut();
+      $(".confirm-button").fadeOut();
+      $(".back-page").fadeOut();
+      sessionStorage.clear();
 
       setTimeout(() => {
         $(".thank-you-content")
