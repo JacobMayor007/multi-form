@@ -596,6 +596,10 @@ const confirmButton = () => {
           padding: "10px 70px 10px 80px",
         });
       }, 500);
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 2000);
     }
   });
 };
