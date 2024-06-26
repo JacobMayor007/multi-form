@@ -10,6 +10,11 @@ $(document).ready(() => {
     window.location.pathname.endsWith("add-ons")
   ) {
     addOnsFunctions();
+  } else if (
+    window.location.pathname.endsWith("summary.html") ||
+    window.location.pathname.endsWith("summary")
+  ) {
+    summaryFunctions();
   } else {
     yourInfoFunction();
   }
@@ -17,36 +22,64 @@ $(document).ready(() => {
 
 const yourInfoFunction = () => {
   windowLoaderFunction();
+  toggleClass();
+  nextStepIndexFunction();
+  saveInfoFunction();
+  nextStepFunction();
 };
 
 const selectPlanFunction = () => {
   windowLoaderSelectedPlanFunction();
-  selectPlanDisableButtonFunction();
+  toggleClass();
   savedStateFunctions();
   savePlanValueFunction();
   toggleClass();
   BackPage();
+  nextStepPlanFunction();
   saveSelectedPlanFunction();
   cancelFunction();
-  getInformation();
 };
 
 const addOnsFunctions = () => {
   windowLoaderAddOnsFunction();
   checkUncheckBox();
   toggleClass();
-  addOnsFunctionsDisableButtonFunction();
   BackPageAddOns();
+  nextStepAddOnsFunction();
   YearlyMonthlyAddOnsFunctions();
   saveAddOnsStorageFunction();
+  saveAddOnsPricing();
+};
+
+const summaryFunctions = () => {
+  windowLoaderSummaryFunction();
+  confirmButton();
+  buttonsSummary();
+  summaryOfAll();
 };
 
 let fullName, email, phoneNumber, selectedPlan;
 
+var onlineService, largerStorage, customizableProfile;
+
 //Index Functions
 
+const nextStepIndexFunction = () => {
+  $(".btn-two").on("click", () => {
+    window.location.href = "select-plan.html";
+  });
+
+  $(".btn-three").on("click", () => {
+    window.location.href = "add-ons.html";
+  });
+
+  $(".btn-four").on("click", () => {
+    window.location.href = "summary.html";
+  });
+};
+
 const nextStepFunction = () => {
-  $(".next-step-button, .btn-two").on("click", () => {
+  $(".next-step-button").on("click", () => {
     fullName = $("#fullName-input").val();
     email = $("#email-input").val();
     phoneNumber = $("#phonenumber-input").val();
@@ -56,10 +89,11 @@ const nextStepFunction = () => {
 };
 
 const errorHandling = (fullName, email, phoneNumber) => {
+  let enable = false;
   if (fullName === "" && email === "" && phoneNumber === "") {
-    $(".btn-two, .btn-three, .btn-four").attr("disabled", "disabled");
-    $(".btn").removeClass("active");
-    $(".btn-one").addClass("active");
+    // $(".btn-two, .btn-three, .btn-four").attr("disabled", "disabled");
+    // $(".btn").removeClass("active");
+    // $(".btn-one").addClass("active");
 
     $(".error").css({ color: "#c83f49", fontSize: "16px" }).fadeIn();
     setTimeout(() => {
@@ -104,7 +138,7 @@ const errorHandling = (fullName, email, phoneNumber) => {
   } else {
     window.location.href = "select-plan.html";
     saveInfoFunction();
-    $(".btn-two").removeAttr("disabled");
+    enable = true;
   }
 };
 
@@ -119,7 +153,6 @@ const isValidEmail = (email) => {
 };
 
 const saveInfoFunction = () => {
-  // Save the fullName value to local storage when the input changes
   $("#fullName-input").on("input", function () {
     const fullName = $(this).val();
     sessionStorage.setItem("fullNameValue", fullName);
@@ -154,9 +187,23 @@ const saveInfoFunction = () => {
 
 //Select Plan Functions
 
+const nextStepPlanFunction = () => {
+  $(".btn-one, .back-page").on("click", () => {
+    window.location.href = "index.html";
+  });
+
+  $(".btn-three").on("click", () => {
+    window.location.href = "add-ons.html";
+  });
+
+  $(".btn-four").on("click", () => {
+    window.location.href = "summary.html";
+  });
+};
+
 const savePlanValueFunction = () => {
   $(".next-button, .btn-three").on("click", () => {
-    const value = $("input[name = 'plans']:checked").val();
+    let value = $("input[name = 'plans']:checked").val();
     const toggleCheck = $("#toggle-switch").is(":checked");
     if (value === undefined) {
       $(".content > div > h4")
@@ -166,17 +213,16 @@ const savePlanValueFunction = () => {
       setTimeout(() => {
         $(".content > div > h4").fadeOut();
       }, 5000);
-    } else if (toggleCheck === true) {
-      selectedPlan = parseInt(value) * 10;
-      window.location.href = "add-ons.html";
-    } else if (toggleCheck === false) {
-      selectedPlan = parseInt(value) * 1;
-      window.location.href = "add-ons.html";
     } else {
-      console.log("Syntax error");
+      if (toggleCheck) {
+        value = parseInt(value) * 10;
+      }
+      sessionStorage.setItem("selectedPlanValue", value);
+      window.location.href = "add-ons.html";
     }
   });
 };
+
 const BackPage = () => {
   if (
     window.location.pathname.endsWith("select-plan") ||
@@ -196,10 +242,6 @@ const toggleYearlyMonthly = () => {
       $(this).attr("value", "false");
     }
   });
-};
-
-const selectPlanDisableButtonFunction = () => {
-  $(".btn-three, .btn-four").attr("disabled", "disabled");
 };
 
 const savedStateFunctions = () => {
@@ -269,15 +311,11 @@ const cancelFunction = () => {
 const windowLoaderFunction = () => {
   $(".loader-page").fadeOut(500);
   $(".load-page").fadeIn(1500);
-  toggleClass();
-  nextStepFunction();
-  saveInfoFunction();
 };
 
 const windowLoaderSelectedPlanFunction = () => {
   $(".loader-page").fadeOut(500);
   $(".load-page").fadeIn(200);
-  toggleClass();
 };
 
 const toggleClass = () => {
@@ -288,6 +326,20 @@ const toggleClass = () => {
 };
 
 /* Add-Ons Functions */
+const nextStepAddOnsFunction = () => {
+  $(".btn-one").on("click", () => {
+    window.location.href = "index.html";
+  });
+
+  $(".btn-two").on("click", () => {
+    window.location.href = "select-plan.html";
+  });
+
+  $(".next-button, .btn-four").on("click", () => {
+    window.location.href = "summary.html";
+  });
+};
+
 const windowLoaderAddOnsFunction = () => {
   $(".loader-page").fadeOut(500);
   $(".load-page").fadeIn(200);
@@ -297,10 +349,6 @@ const checkUncheckBox = () => {
   $("label").change(function () {
     $(this).toggleClass("active");
   });
-};
-
-const addOnsFunctionsDisableButtonFunction = () => {
-  $(".btn-four").attr("disabled", "disabled");
 };
 
 const BackPageAddOns = () => {
@@ -338,7 +386,9 @@ const YearlyMonthlyAddOnsFunctions = () => {
   function updatePricing(isYearly) {
     $(".online-service > div > h5").text(isYearly ? "+$10/yr" : "+$1/mo");
     $(".larger-storage > div >h5").text(isYearly ? "+$20/yr" : "+$2/mo");
-    $(".customizable-profile > div > h5").text(isYearly ? "+$20/yr" : "+$2/mo");
+    customizableProfile = $(".customizable-profile > div > h5").text(
+      isYearly ? "+$20/yr" : "+$2/mo"
+    );
   }
 };
 
@@ -374,15 +424,189 @@ const saveAddOnsStorageFunction = () => {
     const customizableProfileValue =
       sessionStorage.getItem("customizableProfileValue") === "true";
 
-    $("#online-service-checkbox").prop("checked", onlineServiceValue);
-    $("#larger-storage-checkbox").prop("checked", largerStorageValue);
-    $("#customizable-profile-checkbox").prop(
-      "checked",
-      customizableProfileValue
-    );
+    if (onlineServiceValue) {
+      checkboxOnlineService.prop("checked", onlineServiceValue);
+      $(".online-service").addClass("active");
+
+      $("#online-service-checkbox").val(10);
+    }
+    if (largerStorageValue) {
+      checkboxLargerStorage.prop("checked", largerStorageValue);
+      $(".larger-storage").addClass("active");
+    }
+    if (customizableProfileValue) {
+      checkboxCustomizableProfile.prop("checked", customizableProfileValue);
+      $(".customizable-profile").addClass("active");
+    }
   }
 
   loadAddons();
 };
 
-const saveAddOnsPricing = (isYearly) => {};
+const saveAddOnsPricing = (isYearly) => {
+  $(".next-button, .btn-four").on("click", () => {
+    const onlineServiceValue =
+      sessionStorage.getItem("onlineServiceValue") === "true";
+    const largerStorageValue =
+      sessionStorage.getItem("largerStorageValue") === "true";
+    const customizableProfileValue =
+      sessionStorage.getItem("customizableProfileValue") === "true";
+    let totalPrice = 0;
+
+    if (isYearly) {
+      if (onlineServiceValue) {
+        totalPrice += 10;
+      }
+      if (largerStorageValue) {
+        totalPrice += 20;
+      }
+      if (customizableProfileValue) {
+        totalPrice += 20;
+      }
+      sessionStorage.setItem("totalPrice", totalPrice);
+    }
+
+    if (isYearly === false) {
+      if (onlineServiceValue) {
+        totalPrice += 1;
+      }
+      if (largerStorageValue) {
+        totalPrice += 2;
+      }
+      if (customizableProfileValue) {
+        totalPrice += 2;
+      }
+      sessionStorage.setItem("totalPrice", totalPrice);
+    }
+    window.location.href = "summary.html";
+  });
+};
+
+/* Summary Sections */
+
+const windowLoaderSummaryFunction = () => {
+  $(".loader-page").fadeOut();
+  $(".load-page").fadeIn();
+};
+
+const summaryOfAll = () => {
+  const checkboxState = sessionStorage.getItem("checkboxState") === "true";
+  const totalPrice = sessionStorage.getItem("totalPrice");
+  var selectedPlan = sessionStorage.getItem("selectedPlan").split("-");
+  selectedPlan = selectedPlan[0].toLowerCase();
+  const firstCharacter = selectedPlan.slice(0, 1).toUpperCase();
+  const restOfCharacter = selectedPlan.slice(1, selectedPlan.length);
+  const conCat = firstCharacter + restOfCharacter;
+  const onlineServiceValue =
+    sessionStorage.getItem("onlineServiceValue") === "true";
+  const largerStorageValue =
+    sessionStorage.getItem("largerStorageValue") === "true";
+  const customizableProfileValue =
+    sessionStorage.getItem("customizableProfileValue") === "true";
+  const selectedPlanValue = sessionStorage.getItem("selectedPlanValue");
+  let totalPriceValue = parseInt(totalPrice) + parseInt(selectedPlanValue);
+
+  $(".selected-plan").text(`${conCat}`).css("color", "#01386a");
+
+  $(".monthly-yearly-total").text(
+    checkboxState ? "Total (per year)" : "Total (per month)"
+  );
+
+  $(".monthly-yearly")
+    .text(checkboxState ? "(Yearly)" : "(Monthly)")
+    .css("color", "#01386a");
+
+  $(".row > div > .summary-label >div > h3")
+    .text("$" + selectedPlanValue + (checkboxState ? "/yr" : "/mo"))
+    .css({ color: "#01386a" });
+
+  $(".add-ons-one")
+    .text(onlineServiceValue ? "Online Service Value" : "")
+    .css({ display: onlineServiceValue ? "block" : "none" });
+
+  $(".add-ons-two")
+    .text(largerStorageValue ? "Larger Storage" : "")
+    .css({ display: largerStorageValue ? "block" : "none" });
+
+  $(".add-ons-three")
+    .text(customizableProfileValue ? "Customizable Profile" : "")
+    .css({ display: customizableProfileValue ? "block" : "none" });
+
+  if (onlineServiceValue) {
+    $(".add-ons-one-value").text(checkboxState ? "$10/yr" : "$1/mo");
+  }
+
+  if (largerStorageValue) {
+    $(".add-ons-two-value").text(checkboxState ? "$20/yr" : "$2/mo");
+  }
+
+  if (customizableProfileValue) {
+    $(".add-ons-three-value").text(checkboxState ? "$20/yr" : "$2/mo");
+  }
+
+  $(".totalPriceValue").text(
+    checkboxState ? `$${totalPriceValue}/yr` : `$${totalPriceValue}/yr`
+  );
+};
+
+const confirmButton = () => {
+  $(".confirm-button").on("click", () => {
+    const fullNameValue = sessionStorage.getItem("fullNameValue");
+    const phoneNumberValue = sessionStorage.getItem("phoneNumberValue");
+    const emailValue = sessionStorage.getItem("emailValue");
+    const selectedPlan = sessionStorage.getItem("selectedPlan");
+
+    if (!fullNameValue && !phoneNumberValue && !emailValue) {
+      window.alert(
+        "There is a missing field that needs to be filled out!\nPlease fill out the field."
+      );
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 300);
+    } else if (!selectedPlan) {
+      alert(
+        "There is a missing field that needs to be filled out!\nPlease fill out the field."
+      );
+      setTimeout(() => {
+        window.location.href = "select-plan.html";
+      }, 300);
+    } else {
+      $(".content").fadeOut();
+
+      setTimeout(() => {
+        $(".thank-you-content")
+          .css({
+            display: "flext",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+          })
+          .fadeIn();
+        $(".inside-content").css({
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "300px",
+          padding: "10px 70px 10px 80px",
+        });
+      }, 500);
+    }
+  });
+};
+
+const buttonsSummary = () => {
+  $(".back-page, .btn-three").on("click", () => {
+    window.location.href = "add-ons.html";
+  });
+
+  $(".btn-two").on("click", () => {
+    window.location.href = "select-plan.html";
+  });
+
+  $(".btn-one").on("click", () => {
+    window.location.href = "index.html";
+  });
+};

@@ -91,9 +91,9 @@ h4 {
 }
 
 /* Main Container */
-.load-page {
+/* .load-page {
   display: none;
-}
+} */
 
 section {
   height: 100vh;
@@ -106,12 +106,12 @@ section {
 
 .container {
   border-radius: 20px;
-  height: 70%;
+  height: 85%;
   background-color: rgb(255, 255, 255);
   display: grid;
   padding: 20px;
-  grid-template-columns: 27% 70%;
-  width: 60%;
+  grid-template-columns: 30% 70%;
+  width: 65%;
 }
 
 /* Sidebar Container */
@@ -191,8 +191,8 @@ ol {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 350px;
-  padding: 10px 0px 10px 20px;
+  height: auto;
+  padding: 10px 0px 10px 80px;
 }
 
 .inside-content h1 {
@@ -200,33 +200,45 @@ ol {
 }
 
 /* Contents */
-.row2 {
-  display: none;
-}
 
 .row {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-label {
-  display: grid;
-  grid-template-columns: 20px 290px 50px;
-  grid-template-rows: 70px;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  overflow: hidden;
-  border: 0.1px solid #c7b7a3;
-  border-radius: 10px;
-  background-color: #f8f4ff;
-  padding: 0 20px;
-  cursor: pointer;
 }
 
-label > input {
-  height: 18px;
-  background-color: #01386a;
+label {
+  width: auto;
+  display: grid;
+  grid-template-columns: 350px 70px;
+  grid-template-rows: 90px;
+  align-items: center;
+  padding: 0 20px 0px 10px;
+  gap: 15px;
+  overflow: hidden;
+}
+
+label > div > a {
+  text-decoration-color: #c7b7a3;
+}
+
+.row > .inside-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #f8f4ff;
+  border-radius: 10px;
+  padding: 0 20px 20px 10px;
+}
+
+.row > div > div {
+  display: grid;
+  grid-template-columns: 400px 65px;
+}
+
+.add-ons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .active {
@@ -234,43 +246,94 @@ label > input {
   background-color: #f8f4ff;
 }
 
-.row > label > div > h4,
-.row > label > div > h5 {
+.row > label > div > div > h3 {
   color: #01386a;
-  font-weight: 700;
+  font-weight: 500;
+}
+
+.row > label .price div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .content > div {
   margin-bottom: 35px;
 }
 
+.add-ons-one,
+.add-ons-two,
+.add-ons-three {
+  display: none;
+}
+
 /* Button */
 
-.next-button,
+.confirm-button,
 .back-page {
   text-align: center;
-  background-color: #01386a;
   border-radius: 5px;
   cursor: pointer;
   position: absolute;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 650;
-  height: 35px;
-  width: 110px;
-  color: hsl(0, 0%, 100%);
-  text-decoration: none;
+  height: 48px;
+  width: 130px;
+  border: none;
+  &:active {
+    border: 1px ridge #c7b7a3;
+    box-shadow: 2px 5px #777;
+  }
 }
 
-.next-button {
+.confirm-button {
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   bottom: 20px;
   right: 0;
+  background-color: #601ef9;
+  color: hsl(0, 0%, 100%);
 }
 
 .back-page {
   left: 60px;
   bottom: 20px;
   font-size: 16px;
+  color: #c7b7a3;
+  background: none;
 }
+
+.total-container {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 400px 90px;
+  padding-right: 50px;
+}
+
+.totalPriceValue {
+  color: #601ef9;
+}
+
+.thank-you-content {
+  display: none;
+}
+
+/* .thank-you-content {
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.inside-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  padding: 10px 70px 10px 80px;
+} */
