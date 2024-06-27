@@ -31,6 +31,14 @@
 
 */
 /* Universal */
+.mobile-version {
+  display: none;
+}
+
+.desktop-version {
+  visibility: visible;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -105,11 +113,11 @@ section {
 
 .container {
   border-radius: 20px;
-  height: 70%;
+  height: 90%;
   background-color: rgb(255, 255, 255);
   display: grid;
   padding: 20px;
-  grid-template-columns: 27% 73%;
+  grid-template-columns: auto auto;
   width: 60%;
 }
 
@@ -131,7 +139,7 @@ section {
 
 .steps-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
