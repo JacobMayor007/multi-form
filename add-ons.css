@@ -114,11 +114,11 @@ section {
 
 .container {
   border-radius: 20px;
-  height: 70%;
+  height: 90%;
   background-color: rgb(255, 255, 255);
   display: grid;
   padding: 20px;
-  grid-template-columns: 27% 70%;
+  grid-template-columns: auto auto;
   width: 60%;
 }
 

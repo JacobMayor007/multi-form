@@ -328,11 +328,3 @@ label > div > a {
 .thank-you-content {
   display: none;
 }
-
-/* .thank-you-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-} */
