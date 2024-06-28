@@ -95,14 +95,14 @@
   }
 
   .fullname-error {
-    margin-left: 133px;
+    margin-left: 100px;
   }
 
   .email-error {
-    margin-left: 58px;
+    margin-left: 25px;
   }
 
   .phonenumber-error {
-    margin-left: 49px;
+    margin-left: 20px;
   }
 }
