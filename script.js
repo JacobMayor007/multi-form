@@ -543,9 +543,9 @@ const summaryOfAll = () => {
     $(".add-ons-three-value").text(checkboxState ? "$20/yr" : "$2/mo");
   }
 
-  $(".totalPriceValue").text(
-    checkboxState ? `$${totalPriceValue}/yr` : `$${totalPriceValue}/yr`
-  );
+  $(".totalPriceValue")
+    .text(checkboxState ? `$${totalPriceValue}/yr` : `$${totalPriceValue}/yr`)
+    .css({ fontWeight: "600" });
 };
 
 const confirmButton = () => {

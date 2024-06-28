@@ -29,7 +29,7 @@
 
   .mobile-version {
     width: 100vw;
-    height: 197px;
+    height: 190px;
   }
 
   .sidebar-content {
@@ -74,14 +74,15 @@
     padding: 0;
     width: 100vw;
     position: relative;
-    left: 10px;
-    top: -30px;
+    left: 0px;
+    top: -42px;
   }
 
   .inside-content {
     margin-left: 0;
     border-radius: 10px;
     height: 50vh;
+    left: 10px;
     position: relative;
     width: 95vw;
     background-color: white;
@@ -97,6 +98,7 @@
   }
   .container {
     border-radius: 20px;
+    width: 100vw;
     height: 70%;
     background-color: #f8f4ff;
     display: grid;
