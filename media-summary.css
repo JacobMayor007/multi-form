@@ -34,7 +34,7 @@
     justify-content: center;
     height: 10vh;
     width: 50vw;
-    left: 120px;
+    left: 133px;
     top: 50px;
   }
 
@@ -87,11 +87,11 @@
 
   .main-content {
     padding: 0;
-    width: 80vw;
-    height: 70vh;
+    width: 100vw;
+    height: 80vh;
     position: relative;
-    left: 50px;
-    bottom: 30px;
+    left: 26px;
+    bottom: 90px;
   }
 
   .inside-content {
@@ -102,6 +102,10 @@
     position: relative;
     background-color: none;
     padding: 0;
+  }
+
+  body {
+    background-color: #f8f4ff;
   }
 
   section {
