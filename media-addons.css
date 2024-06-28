@@ -90,7 +90,7 @@
     height: 70vh;
     position: relative;
     left: 0px;
-    bottom: 30px;
+    bottom: 65px;
   }
 
   .inside-content {
@@ -114,6 +114,7 @@
     align-items: baseline;
     background-color: #f8f4ff;
   }
+
   .container {
     border-radius: 20px;
     height: 70%;

@@ -543,7 +543,7 @@ const summaryOfAll = () => {
   }
 
   $(".totalPriceValue")
-    .text(checkboxState ? `$${totalPriceValue}/yr` : `$${totalPriceValue}/yr`)
+    .text(checkboxState ? `$${totalPriceValue}/yr` : `$${totalPriceValue}/mo`)
     .css({ fontWeight: "600" });
 };
 
