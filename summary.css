@@ -31,6 +31,14 @@
 
 */
 /* Universal */
+.mobile-version {
+  display: none;
+}
+
+.desktop-version {
+  visibility: visible;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -190,9 +198,10 @@ ol {
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  height: auto;
-  padding: 10px 0px 10px 80px;
+  height: 300px;
+  padding: 10px 70px 10px 80px;
 }
 
 .inside-content h1 {
@@ -322,18 +331,8 @@ label > div > a {
 
 /* .thank-you-content {
   display: flex;
-  flex-direction: center;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-}
-
-.inside-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 300px;
-  padding: 10px 70px 10px 80px;
 } */

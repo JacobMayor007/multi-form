@@ -21,14 +21,6 @@
     height: 220px;
   }
 
-  /* .mobile-version {
-  display: none;
-}
-
-.desktop-version {
-  visibility: visible;
-} */
-
   .sidebar-content {
     display: flex;
     align-items: center;
@@ -87,12 +79,24 @@
   .container {
     border-radius: 20px;
     height: 70%;
-    background-color: rgb(255, 255, 255);
+    background-color: #f8f4ff;
     display: grid;
     padding: 0px;
     grid-template-columns: 100%;
     grid-template-rows: 20%;
     width: 100vw;
     height: 100vh;
+  }
+
+  .fullname-error {
+    margin-left: 133px;
+  }
+
+  .email-error {
+    margin-left: 58px;
+  }
+
+  .phonenumber-error {
+    margin-left: 49px;
   }
 }

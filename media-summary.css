@@ -50,14 +50,32 @@
   }
 
   .content {
-    height: auto;
-    padding-top: 20px;
+    height: 400px;
+    width: 380px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: hsl(0, 0%, 100%);
+  }
+
+  label {
+    width: auto;
+    display: grid;
+    grid-template-columns: 250px 70px;
+    grid-template-rows: 90px;
+    align-items: center;
+    padding: 0 20px 0px 10px;
+    gap: 15px;
+    overflow: hidden;
+  }
+
+  .row > div > div {
+    display: grid;
+    grid-template-columns: 300px 65px;
   }
 
   form {
-    width: auto;
+    width: 100%;
     height: auto;
-    padding: 20px 30px;
   }
 
   .main-content {
@@ -73,9 +91,9 @@
     margin-left: 0;
     border-radius: 10px;
     width: 100%;
-    height: 100%;
+    height: 70%;
     position: relative;
-    background-color: white;
+    background-color: none;
     padding: 0;
   }
 
@@ -93,7 +111,7 @@
     display: grid;
     padding: 0px;
     grid-template-columns: 100%;
-    grid-template-rows: 18%;
+    grid-template-rows: 20%;
     width: 100vw;
     height: 100vh;
   }
@@ -126,6 +144,13 @@
     }
   }
 
+  .total-container {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 100px 80px;
+    padding-right: 50px;
+  }
+
   .option {
     display: flex;
     flex-direction: row;
@@ -136,7 +161,7 @@
     margin-bottom: 0;
   }
 
-  .next-button {
+  .confirm-button {
     display: flex;
     align-items: center;
     justify-content: center;

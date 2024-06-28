@@ -54,6 +54,7 @@ const addOnsFunctions = () => {
 const summaryFunctions = () => {
   windowLoaderSummaryFunction();
   confirmButton();
+  mediaQuery();
   buttonsSummary();
   summaryOfAll();
 };
@@ -95,24 +96,22 @@ const errorHandling = (fullName, email, phoneNumber) => {
     // $(".btn").removeClass("active");
     // $(".btn-one").addClass("active");
 
-    $(".error").css({ color: "#c83f49", fontSize: "16px" }).fadeIn();
+    $(".error").css({ color: "#c83f49" }).fadeIn();
     setTimeout(() => {
       $(".error").css({ color: "#c83f49" }).fadeOut();
     }, 3000);
   } else if (fullName === "" || !isFullNameValid(fullName)) {
-    $(".fullname-error").css({ color: "#c83f49", fontSize: "16px" }).fadeIn();
+    $(".fullname-error").css({ color: "#c83f49" }).fadeIn();
     setTimeout(() => {
       $(".fullname-error").fadeOut();
     }, 3000);
   } else if (email === "" || !isValidEmail(email)) {
-    $(".email-error").css({ color: "#c83f49", fontSize: "16px" }).fadeIn();
+    $(".email-error").css({ color: "#c83f49" }).fadeIn();
     setTimeout(() => {
       $(".email-error").fadeOut();
     }, 3000);
   } else if (phoneNumber === "") {
-    $(".phonenumber-error")
-      .css({ color: "#c83f49", fontSize: "16px" })
-      .fadeIn();
+    $(".phonenumber-error").css({ color: "#c83f49" }).fadeIn();
     setTimeout(() => {
       $(".phonenumber-error").fadeOut();
     }, 3000);
@@ -122,15 +121,15 @@ const errorHandling = (fullName, email, phoneNumber) => {
   ) {
     $(".phonenumber-error")
       .text("Limit: 11 characters")
-      .css({ color: "#c83f49", fontSize: "16px" })
+      .css({ color: "#c83f49" })
       .fadeIn();
     setTimeout(() => {
       $(".phonenumber-error").fadeOut();
     }, 3000);
   } else if (phoneNumber.substring(0, 1) != 0) {
     $(".phonenumber-error")
-      .text("First character is incorrect")
-      .css({ color: "#c83f49", marginLeft: "112px", fontSize: "16px" })
+      .text("First Character Error")
+      .css({ color: "#c83f49", marginLeft: "50px", fontSize: "16px" })
       .fadeIn(1000);
     setTimeout(() => {
       $(".phonenumber-error").fadeOut(1000);
@@ -265,17 +264,17 @@ const savedStateFunctions = () => {
 
   function updatePricing(isYearly) {
     $(".option-one > p").text(isYearly ? "$90/year" : "$9/mo");
-    $(".option-one > h5").css({ display: isYearly ? "block" : "none" });
-    $(".option-one > h5").text(isYearly ? "2 months free" : "");
+    $(".option-one > h5")
+      .css({ display: isYearly ? "block" : "none" })
+      .text(isYearly ? "2 months free" : "");
     $(".option-two > p").text(isYearly ? "$120/year" : "$12/mo");
-    $(".option-two > h5").css({ display: isYearly ? "block" : "none" });
-    $(".option-two > h5").text(isYearly ? "2 months free" : "");
+    $(".option-two > h5")
+      .css({ display: isYearly ? "block" : "none" })
+      .text(isYearly ? "2 months free" : "");
     $(".option-three > p").text(isYearly ? "$150/year" : "$15/mo");
-    $(".option-three > h5").css({ display: isYearly ? "block" : "none" });
-    $(".option-three > h5").text(isYearly ? "2 months free" : "");
-    $("#pro-radio, #advanced-radio, #arcade-radio").css({
-      height: isYearly ? "150px" : "130px",
-    });
+    $(".option-three > h5")
+      .css({ display: isYearly ? "block" : "none" })
+      .text(isYearly ? "2 months free" : "");
   }
 };
 
@@ -579,22 +578,13 @@ const confirmButton = () => {
       setTimeout(() => {
         $(".thank-you-content")
           .css({
-            display: "flext",
+            display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
           })
           .fadeIn();
-        $(".inside-content").css({
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "300px",
-          padding: "10px 70px 10px 80px",
-        });
       }, 500);
 
       setTimeout(() => {
@@ -616,4 +606,18 @@ const buttonsSummary = () => {
   $(".btn-one").on("click", () => {
     window.location.href = "index.html";
   });
+};
+
+const mediaQuery = () => {
+  const query = window.matchMedia("screen and (max-width: 480px)");
+
+  const applyStyles = (event) => {
+    $("#arcade-radio").css({ height: event.matches ? "80px" : "130px" });
+  };
+
+  // Apply styles initially
+  applyStyles(query);
+
+  // Listen for changes in the media query state
+  query.addEventListener("change", applyStyles);
 };

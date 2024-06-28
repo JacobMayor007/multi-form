@@ -252,17 +252,18 @@ input {
 
 /* Error Handling*/
 .email-error {
-  margin-left: 162px;
+  margin-left: 123px;
 }
 
 .fullname-error {
-  margin-left: 237px;
+  margin-left: 197px;
 }
 
 .phonenumber-error {
-  margin-left: 156px;
+  margin-left: 117px;
 }
 
 .error {
   display: none;
+  font-size: 16px;
 }

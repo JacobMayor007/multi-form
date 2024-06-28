@@ -31,6 +31,14 @@
 
 */
 /* Universal */
+.mobile-version {
+  display: none;
+}
+
+.desktop-version {
+  visibility: visible;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -106,11 +114,11 @@ section {
 
 .container {
   border-radius: 20px;
-  height: 70%;
+  height: 90%;
   background-color: rgb(255, 255, 255);
   display: grid;
   padding: 20px;
-  grid-template-columns: 27% 70%;
+  grid-template-columns: auto auto;
   width: 60%;
 }
 
@@ -239,11 +247,10 @@ ol {
 #arcade-radio,
 #advanced-radio,
 #pro-radio {
-  position: relative;
   appearance: none;
   border-radius: 5px;
-  height: 130px;
-  width: 110px;
+  height: 150px;
+  width: 120px;
   background: #f8f4ff;
   cursor: pointer;
   &:checked {
@@ -280,14 +287,14 @@ ol {
 }
 
 .back-page {
-  left: 60px;
+  left: 0px;
   bottom: 20px;
   font-size: 16px;
 }
 
 #btnSubmit {
   bottom: 20px;
-  left: 265px;
+  left: 190px;
 }
 
 /* Error Handling*/
