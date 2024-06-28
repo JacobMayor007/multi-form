@@ -53,9 +53,8 @@ const addOnsFunctions = () => {
 
 const summaryFunctions = () => {
   windowLoaderSummaryFunction();
-  confirmButton();
-  mediaQuery();
   buttonsSummary();
+  confirmButton();
   summaryOfAll();
 };
 
@@ -129,7 +128,7 @@ const errorHandling = (fullName, email, phoneNumber) => {
   } else if (phoneNumber.substring(0, 1) != 0) {
     $(".phonenumber-error")
       .text("First Character Error")
-      .css({ color: "#c83f49", marginLeft: "50px", fontSize: "16px" })
+      .css({ color: "#c83f49", marginLeft: "18px", fontSize: "16px" })
       .fadeIn(1000);
     setTimeout(() => {
       $(".phonenumber-error").fadeOut(1000);
@@ -548,6 +547,20 @@ const summaryOfAll = () => {
     .css({ fontWeight: "600" });
 };
 
+const buttonsSummary = () => {
+  $(".back-page, .btn-three").on("click", () => {
+    window.location.href = "add-ons.html";
+  });
+
+  $(".btn-two").on("click", () => {
+    window.location.href = "select-plan.html";
+  });
+
+  $(".btn-one").on("click", () => {
+    window.location.href = "index.html";
+  });
+};
+
 const confirmButton = () => {
   $(".confirm-button").on("click", () => {
     const fullNameValue = sessionStorage.getItem("fullNameValue");
@@ -592,32 +605,4 @@ const confirmButton = () => {
       }, 2000);
     }
   });
-};
-
-const buttonsSummary = () => {
-  $(".back-page, .btn-three").on("click", () => {
-    window.location.href = "add-ons.html";
-  });
-
-  $(".btn-two").on("click", () => {
-    window.location.href = "select-plan.html";
-  });
-
-  $(".btn-one").on("click", () => {
-    window.location.href = "index.html";
-  });
-};
-
-const mediaQuery = () => {
-  const query = window.matchMedia("screen and (max-width: 480px)");
-
-  const applyStyles = (event) => {
-    $("#arcade-radio").css({ height: event.matches ? "80px" : "130px" });
-  };
-
-  // Apply styles initially
-  applyStyles(query);
-
-  // Listen for changes in the media query state
-  query.addEventListener("change", applyStyles);
 };
